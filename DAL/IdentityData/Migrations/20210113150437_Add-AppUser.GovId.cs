@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace PL.Data.Migrations
+namespace DAL.IdentityData.Migrations
 {
     public partial class AddAppUserGovId : Migration
     {

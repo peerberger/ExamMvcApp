@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace PL.Data
+namespace DAL.IdentityData
 {
 	public class ApplicationDbContext : IdentityDbContext<AppUser>
     {
