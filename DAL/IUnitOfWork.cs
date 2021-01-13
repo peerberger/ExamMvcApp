@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿//using System;
+//using System.Collections.Generic;
+//using System.Text;
 
-namespace DAL
-{
-	public interface IUnitOfWork : IDisposable
-	{
-		//IRepository< Courses { get; }
-		//IAuthorRepository Authors { get; }
+//namespace DAL
+//{
+//	public interface IUnitOfWork : IDisposable
+//	{
+//		//IRepository< Courses { get; }
+//		//IAuthorRepository Authors { get; }
 
-		//int SaveChanges();
-	}
-}
+//		//int SaveChanges();
+//	}
+//}
 
