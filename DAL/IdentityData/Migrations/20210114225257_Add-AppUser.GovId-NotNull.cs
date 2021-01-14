@@ -2,7 +2,7 @@
 
 namespace DAL.IdentityData.Migrations
 {
-    public partial class AddAppUserGovId : Migration
+    public partial class AddAppUserGovIdNotNull : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -10,7 +10,8 @@ namespace DAL.IdentityData.Migrations
                 name: "GovId",
                 table: "AspNetUsers",
                 type: "nvarchar(max)",
-                nullable: true);
+                nullable: false,
+                defaultValue: "000000000");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

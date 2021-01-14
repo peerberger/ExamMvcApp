@@ -49,6 +49,7 @@ namespace PL.Areas.Identity.Pages.Account
 
             [Required]
             [DataType(DataType.Password)]
+            //[StringLength(maximumLength:9, MinimumLength =9)]
             public string Password { get; set; }
 
             [Display(Name = "Remember me?")]
