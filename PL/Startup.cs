@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using DAL.IdentityData;
 using System;
+using DAL.Repositories;
 
 namespace PL
 {
@@ -65,6 +66,8 @@ namespace PL
 				options.AccessDeniedPath = "/Identity/Account/AccessDenied";
 				options.SlidingExpiration = true;
 			});
+
+			services.AddScoped<IUnitOfWork, UnitOfWork>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -93,7 +96,7 @@ namespace PL
 			{
 				endpoints.MapControllerRoute(
 					name: "default",
-					pattern: "{controller=Home}/{action=Index}/{id?}");
+					pattern: "{controller=Student}/{action=Index}/{id?}");
 				endpoints.MapRazorPages();
 			});
 		}
