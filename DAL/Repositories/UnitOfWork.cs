@@ -12,12 +12,14 @@ namespace DAL.Repositories
 	{
 		private readonly ApplicationDbContext _context;
 
-		public IRepository<Exam> Exams { get; set; }
+		//public ApplicationDbContext Context { get => _context; }
+
+		public IExamRepository Exams { get; set; }
 
 		public UnitOfWork(ApplicationDbContext context)
 		{
 			_context = context;
-			Exams = new Repository<Exam>(_context);
+			Exams = new ExamRepository(_context);
 		}
 
 		public int SaveChanges()

@@ -1,5 +1,4 @@
 ﻿using DAL.Models;
-using DAL.Models.JoinTypes;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;

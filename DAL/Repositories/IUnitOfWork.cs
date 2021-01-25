@@ -7,7 +7,7 @@ namespace DAL.Repositories
 {
 	public interface IUnitOfWork : IDisposable
 	{
-		IRepository<Exam> Exams { get; }
+		IExamRepository Exams { get; }
 
 		int SaveChanges();
 	}
