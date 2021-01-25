@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DAL.IdentityData;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -19,6 +20,12 @@ namespace DAL.Models
 		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public string Title { get; set; }
 		public TimeSpan Duration { get; set; }
+		public ICollection<AppUser> Users { get; set; }
+
+
+
+
+
 		//[Required]
 		//public string TeacherId { get; set; }
 		//public ICollection<Classroom> Classrooms { get; set; }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using DAL.Models;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -13,5 +14,6 @@ namespace DAL.IdentityData
 		[Required]
 		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public string GovId { get; set; }
+		public ICollection<Exam> Exams { get; set; }
 	}
 }
