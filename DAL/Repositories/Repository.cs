@@ -22,10 +22,16 @@ namespace DAL.Repositories
 			return _context.Set<TEntity>().Find(id);
 		}
 
-		//public TEntity GetById(object id, string includeProperty)
-		//{
-		//	return Context.Set<TEntity>().Include(includeProperty).quer.Find(id);
-		//}
+		protected TEntity GetByIdIncluding(object id, string navigationPropertyPath = null, Expression<Func<TEntity, bool>> predicate = null)
+		{
+			if (navigationPropertyPath != null && predicate != null)
+			{
+				var item = _context.Set<TEntity>().Include(navigationPropertyPath).FirstOrDefault(predicate);
+				return item;
+			}
+
+			return _context.Set<TEntity>().Find(id);
+		}
 
 		public IEnumerable<TEntity> GetAll()
 		{
@@ -42,13 +48,14 @@ namespace DAL.Repositories
 		{
 			if (navigationPropertyPath != null)
 			{
-				return _context.Set<TEntity>().Include(navigationPropertyPath).ToList(); 
+				return _context.Set<TEntity>().Include(navigationPropertyPath).ToList();
 			}
 
 			return _context.Set<TEntity>().ToList();
 		}
 
-		// todo: when the project's finished delete all unused methods
+		// todo: when the project's finished delete all unused methods and properties,
+		// and implement interface segregation principle
 		public IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)
 		{
 			return _context.Set<TEntity>().Where(predicate);

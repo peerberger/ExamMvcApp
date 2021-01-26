@@ -16,6 +16,11 @@ namespace DAL.Repositories
 		{
 		}
 
+		public Exam GetByIdIncludingUsers(object id)
+		{
+			return GetByIdIncluding(id, nameof(Exam.Users), e => e.Id == (int)id);
+		}
+
 		public IEnumerable<Exam> GetAllIncludingUsers()
 		{
 			return GetAllIncluding(nameof(Exam.Users));

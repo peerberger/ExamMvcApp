@@ -6,6 +6,7 @@ namespace DAL.Repositories
 {
 	public interface IExamRepository : IRepository<Exam>
 	{
+		Exam GetByIdIncludingUsers(object id);
 		IEnumerable<Exam> GetAllIncludingUsers();
 	}
 }
