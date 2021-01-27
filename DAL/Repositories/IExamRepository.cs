@@ -1,6 +1,6 @@
-﻿using DAL.IdentityData;
-using DAL.Models;
+﻿using DAL.Models;
 using System.Collections.Generic;
+using System.Security.Claims;
 
 namespace DAL.Repositories
 {
@@ -8,5 +8,6 @@ namespace DAL.Repositories
 	{
 		Exam GetByIdIncludingUsers(object id);
 		IEnumerable<Exam> GetAllIncludingUsers();
+		IEnumerable<Exam> GetByUser(ClaimsPrincipal user);
 	}
 }
