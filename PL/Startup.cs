@@ -60,7 +60,8 @@ namespace PL
 			{
 				// Cookie settings
 				options.Cookie.HttpOnly = true;
-				options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+				//options.ExpireTimeSpan = TimeSpan.FromMinutes(5); // todo: un-comment this line,
+				options.ExpireTimeSpan = TimeSpan.FromDays(14); // and delete this line
 
 				options.LoginPath = "/Identity/Account/Login";
 				options.AccessDeniedPath = "/Identity/Account/AccessDenied";

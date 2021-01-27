@@ -103,7 +103,8 @@ namespace PL.Areas.Identity.Pages.Account
 				{
 					userName = user.UserName;
 				}
-				var result = await _signInManager.PasswordSignInAsync(userName, Input.Password, false, lockoutOnFailure: false);
+				// todo: change the following isPersistent parameter to false
+				var result = await _signInManager.PasswordSignInAsync(userName, Input.Password, true, lockoutOnFailure: false);
 
 				if (result.Succeeded)
 				{
