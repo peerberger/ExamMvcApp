@@ -8,6 +8,6 @@ namespace DAL.Repositories
 	{
 		Exam GetByIdIncludingUsers(object id);
 		IEnumerable<Exam> GetAllIncludingUsers();
-		IEnumerable<Exam> GetByUser(ClaimsPrincipal user);
+		IEnumerable<Exam> GetByUserAsNoTracking(ClaimsPrincipal user);
 	}
 }

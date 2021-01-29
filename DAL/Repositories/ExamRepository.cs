@@ -1,4 +1,5 @@
-﻿using DAL.IdentityData;
+﻿using DAL.HelperClasses;
+using DAL.IdentityData;
 using DAL.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -29,12 +30,12 @@ namespace DAL.Repositories
 			return GetAllIncluding(nameof(Exam.Users));
 		}
 
-		public IEnumerable<Exam> GetByUser(ClaimsPrincipal user)
+		public IEnumerable<Exam> GetByUserAsNoTracking(ClaimsPrincipal user)
 		{
-			var id = user.FindFirst(ClaimTypes.NameIdentifier).Value;
+			var id = ClaimsUserParser.GetNameIdentifier(user);
 
 			// eagerly load only the related Users who match the id
-			var examsWithLoadedUsers = Context.Exams
+			var examsWithLoadedUsers = Context.Exams.AsNoTracking()
 					.Include(e => e.Users
 						.Where(u => u.Id == id))
 					//.Where(e => e.Users.Count == 1)
@@ -42,18 +43,6 @@ namespace DAL.Repositories
 
 			// filter out the exams that weren't assigned to the user
 			var filteredExams = examsWithLoadedUsers.Where(e => e.Users.Count > 0).ToList();
-				
-				// project a collection of { exam, userId } tuples
-				//.SelectMany(e => e.Users,
-				//	(exam, user) => new { exam, userId = user.Id })
-
-				// filter out the tuples the userId of which doesn't match the given id
-				// (whose User wasn't even actually loaded)
-				//.Where(examUser => examUser.userId == id)
-
-				// of the remaining tuples, project only the exam property,
-				// and convert to a list
-				//.Select(examUser => examUser.exam)
 
 			return filteredExams;
 		}
