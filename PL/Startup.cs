@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using DAL.IdentityData;
 using System;
-using DAL.Repositories;
+using DAL.Repositories.UnitOfWorks;
 
 namespace PL
 {

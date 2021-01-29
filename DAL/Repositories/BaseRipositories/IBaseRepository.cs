@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
 
-namespace DAL.Repositories
+namespace DAL.Repositories.BaseRipositories
 {
-	public interface IRepository<TEntity> where TEntity : class
+	public interface IBaseRepository<TEntity> where TEntity : class
 	{
 		// getting
 		TEntity GetById(object id);

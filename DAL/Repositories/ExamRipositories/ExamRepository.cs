@@ -1,6 +1,7 @@
 ﻿using DAL.HelperClasses;
 using DAL.IdentityData;
 using DAL.Models;
+using DAL.Repositories.BaseRipositories;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -9,9 +10,9 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DAL.Repositories
+namespace DAL.Repositories.ExamRipositories
 {
-	public class ExamRepository : Repository<Exam>, IExamRepository
+	public class ExamRepository : BaseRepository<Exam>, IExamRepository
 	{
 		protected ApplicationDbContext Context { get => _context as ApplicationDbContext; }
 

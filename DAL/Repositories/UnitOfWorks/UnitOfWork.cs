@@ -1,12 +1,13 @@
 ﻿using DAL.IdentityData;
 using DAL.Models;
+using DAL.Repositories.ExamRipositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DAL.Repositories
+namespace DAL.Repositories.UnitOfWorks
 {
 	public class UnitOfWork : IUnitOfWork
 	{

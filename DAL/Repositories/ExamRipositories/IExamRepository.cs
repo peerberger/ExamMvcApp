@@ -1,10 +1,11 @@
 ﻿using DAL.Models;
+using DAL.Repositories.BaseRipositories;
 using System.Collections.Generic;
 using System.Security.Claims;
 
-namespace DAL.Repositories
+namespace DAL.Repositories.ExamRipositories
 {
-	public interface IExamRepository : IRepository<Exam>
+	public interface IExamRepository : IBaseRepository<Exam>
 	{
 		Exam GetByIdIncludingUsers(object id);
 		IEnumerable<Exam> GetAllIncludingUsers();
