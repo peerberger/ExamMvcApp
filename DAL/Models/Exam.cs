@@ -20,14 +20,15 @@ namespace DAL.Models
 		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public string Title { get; set; }
 		public TimeSpan Duration { get; set; }
-		public ICollection<AppUser> Users { get; set; }
-
-
-
-
-
 		//[Required]
 		//public string TeacherId { get; set; }
+		public Teacher Teacher { get; set; }
+		public ICollection<Student> Students { get; set; }
+
+
+
+
+
 		//public ICollection<Classroom> Classrooms { get; set; }
 		//public ICollection<Question> Questions { get; set; }
 		//public int? TotalPoints { get; set; }

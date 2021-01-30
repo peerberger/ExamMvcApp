@@ -27,8 +27,25 @@ namespace DAL.IdentityData
 			// For example, you can rename the ASP.NET Identity table names and more.
 			// Add your customizations after calling base.OnModelCreating(builder);
 
+			//builder.Entity<Student>()
+			//.Property(s => s.Exams)
+			//.HasColumnName("Exams");
+
+			//builder.Entity<Teacher>()
+			//	.Property(t => t.Exams)
+			//	.HasColumnName("Exams");
+
+			//builder.Entity<AppUser>()
+			//   .HasDiscriminator()
+			//   .HasValue<Student>("Student")
+			//   .HasValue<Teacher>("Teacher");
+
 			builder.Entity<Exam>()
-				.HasMany(e => e.Users)
+				.HasOne(e => e.Teacher)
+				.WithMany(t => t.Exams);
+
+			builder.Entity<Exam>()
+				.HasMany(e => e.Students)
 				.WithMany(s => s.Exams)
 				.UsingEntity(j =>
 				{
@@ -37,8 +54,8 @@ namespace DAL.IdentityData
 					j.Property(typeof(int), "ExamsId")
 						.HasColumnName("ExamId");
 
-					j.Property(typeof(string), "UsersId")
-						.HasColumnName("UserId");
+					j.Property(typeof(string), "StudentsId")
+						.HasColumnName("StudentId");
 				});
 		}
 	}

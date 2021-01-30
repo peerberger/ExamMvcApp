@@ -14,6 +14,6 @@ namespace DAL.IdentityData
 		[Required]
 		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public string GovId { get; set; }
-		public ICollection<Exam> Exams { get; set; }
+		//public ICollection<Exam> Exams { get; set; }
 	}
 }

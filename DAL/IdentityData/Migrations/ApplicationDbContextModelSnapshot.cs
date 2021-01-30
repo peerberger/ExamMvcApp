@@ -19,23 +19,6 @@ namespace DAL.IdentityData.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.2");
 
-            modelBuilder.Entity("AppUserExam", b =>
-                {
-                    b.Property<int>("ExamsId")
-                        .HasColumnType("int")
-                        .HasColumnName("ExamId");
-
-                    b.Property<string>("UsersId")
-                        .HasColumnType("nvarchar(450)")
-                        .HasColumnName("UserId");
-
-                    b.HasKey("ExamsId", "UsersId");
-
-                    b.HasIndex("UsersId");
-
-                    b.ToTable("ExamsUsers");
-                });
-
             modelBuilder.Entity("DAL.IdentityData.AppUser", b =>
                 {
                     b.Property<string>("Id")
@@ -46,6 +29,10 @@ namespace DAL.IdentityData.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
@@ -104,6 +91,8 @@ namespace DAL.IdentityData.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("AppUser");
                 });
 
             modelBuilder.Entity("DAL.Models.Exam", b =>
@@ -121,6 +110,9 @@ namespace DAL.IdentityData.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("TeacherId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
@@ -128,7 +120,26 @@ namespace DAL.IdentityData.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("TeacherId");
+
                     b.ToTable("Exams");
+                });
+
+            modelBuilder.Entity("ExamStudent", b =>
+                {
+                    b.Property<int>("ExamsId")
+                        .HasColumnType("int")
+                        .HasColumnName("ExamId");
+
+                    b.Property<string>("StudentsId")
+                        .HasColumnType("nvarchar(450)")
+                        .HasColumnName("StudentId");
+
+                    b.HasKey("ExamsId", "StudentsId");
+
+                    b.HasIndex("StudentsId");
+
+                    b.ToTable("ExamsUsers");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -266,7 +277,30 @@ namespace DAL.IdentityData.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("AppUserExam", b =>
+            modelBuilder.Entity("DAL.Models.Student", b =>
+                {
+                    b.HasBaseType("DAL.IdentityData.AppUser");
+
+                    b.HasDiscriminator().HasValue("Student");
+                });
+
+            modelBuilder.Entity("DAL.Models.Teacher", b =>
+                {
+                    b.HasBaseType("DAL.IdentityData.AppUser");
+
+                    b.HasDiscriminator().HasValue("Teacher");
+                });
+
+            modelBuilder.Entity("DAL.Models.Exam", b =>
+                {
+                    b.HasOne("DAL.Models.Teacher", "Teacher")
+                        .WithMany("Exams")
+                        .HasForeignKey("TeacherId");
+
+                    b.Navigation("Teacher");
+                });
+
+            modelBuilder.Entity("ExamStudent", b =>
                 {
                     b.HasOne("DAL.Models.Exam", null)
                         .WithMany()
@@ -274,9 +308,9 @@ namespace DAL.IdentityData.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DAL.IdentityData.AppUser", null)
+                    b.HasOne("DAL.Models.Student", null)
                         .WithMany()
-                        .HasForeignKey("UsersId")
+                        .HasForeignKey("StudentsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -330,6 +364,11 @@ namespace DAL.IdentityData.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("DAL.Models.Teacher", b =>
+                {
+                    b.Navigation("Exams");
                 });
 #pragma warning restore 612, 618
         }
