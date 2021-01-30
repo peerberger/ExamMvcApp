@@ -24,6 +24,7 @@ namespace DAL.Models
 		//public string TeacherId { get; set; }
 		public Teacher Teacher { get; set; }
 		public ICollection<Student> Students { get; set; }
+		public ICollection<Grade> Grades { get; set; }
 
 
 

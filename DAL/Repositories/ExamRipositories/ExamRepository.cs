@@ -26,24 +26,26 @@ namespace DAL.Repositories.ExamRipositories
 			return GetByIdIncluding(id, nameof(Exam.Students), e => e.Id == (int)id);
 		}
 
-		public IEnumerable<Exam> GetAllIncludingUsers()
+		public IEnumerable<Exam> GetAllIncludingStudents()
 		{
 			return GetAllIncluding(nameof(Exam.Students));
 		}
 
-		public IEnumerable<Exam> GetByUserAsNoTracking(ClaimsPrincipal user)
+		public IEnumerable<Exam> GetByStudentAsNoTracking(ClaimsPrincipal user)
 		{
 			var id = ClaimsUserParser.GetNameIdentifier(user);
 
 			// eagerly load only the related Users who match the id
-			var examsWithLoadedUsers = Context.Exams.AsNoTracking()
-					.Include(e => e.Students
-						.Where(u => u.Id == id))
-					//.Where(e => e.Users.Count == 1)
-					.ToList();
+			var examsWithLoadedStudents = Context.Exams.AsNoTracking()
+				.Include(e => e.Students
+					.Where(u => u.Id == id))
+				//.Where(e => e.Users.Count == 1)
+				.ToList();
 
 			// filter out the exams that weren't assigned to the user
-			var filteredExams = examsWithLoadedUsers.Where(e => e.Students.Count > 0).ToList();
+			var filteredExams = examsWithLoadedStudents
+				.Where(e => e.Students.Count > 0)
+				.ToList();
 
 			return filteredExams;
 		}

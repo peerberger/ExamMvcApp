@@ -125,21 +125,22 @@ namespace DAL.IdentityData.Migrations
                     b.ToTable("Exams");
                 });
 
-            modelBuilder.Entity("ExamStudent", b =>
+            modelBuilder.Entity("DAL.Models.Grade", b =>
                 {
-                    b.Property<int>("ExamsId")
-                        .HasColumnType("int")
-                        .HasColumnName("ExamId");
+                    b.Property<string>("StudentId")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("StudentsId")
-                        .HasColumnType("nvarchar(450)")
-                        .HasColumnName("StudentId");
+                    b.Property<int>("ExamId")
+                        .HasColumnType("int");
 
-                    b.HasKey("ExamsId", "StudentsId");
+                    b.Property<double?>("Score")
+                        .HasColumnType("float");
 
-                    b.HasIndex("StudentsId");
+                    b.HasKey("StudentId", "ExamId");
 
-                    b.ToTable("ExamsUsers");
+                    b.HasIndex("ExamId");
+
+                    b.ToTable("StudentsExamsGrades");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -300,19 +301,23 @@ namespace DAL.IdentityData.Migrations
                     b.Navigation("Teacher");
                 });
 
-            modelBuilder.Entity("ExamStudent", b =>
+            modelBuilder.Entity("DAL.Models.Grade", b =>
                 {
-                    b.HasOne("DAL.Models.Exam", null)
-                        .WithMany()
-                        .HasForeignKey("ExamsId")
+                    b.HasOne("DAL.Models.Exam", "Exam")
+                        .WithMany("Grades")
+                        .HasForeignKey("ExamId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DAL.Models.Student", null)
-                        .WithMany()
-                        .HasForeignKey("StudentsId")
+                    b.HasOne("DAL.Models.Student", "Student")
+                        .WithMany("Grades")
+                        .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Exam");
+
+                    b.Navigation("Student");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -364,6 +369,16 @@ namespace DAL.IdentityData.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("DAL.Models.Exam", b =>
+                {
+                    b.Navigation("Grades");
+                });
+
+            modelBuilder.Entity("DAL.Models.Student", b =>
+                {
+                    b.Navigation("Grades");
                 });
 
             modelBuilder.Entity("DAL.Models.Teacher", b =>

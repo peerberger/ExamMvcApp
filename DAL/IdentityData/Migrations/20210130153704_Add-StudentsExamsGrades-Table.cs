@@ -2,7 +2,7 @@
 
 namespace DAL.IdentityData.Migrations
 {
-    public partial class AddExamsUsersTable : Migration
+    public partial class AddStudentsExamsGradesTable : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -20,23 +20,24 @@ namespace DAL.IdentityData.Migrations
                 defaultValue: "");
 
             migrationBuilder.CreateTable(
-                name: "ExamsUsers",
+                name: "StudentsExamsGrades",
                 columns: table => new
                 {
+                    StudentId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ExamId = table.Column<int>(type: "int", nullable: false),
-                    StudentId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    Score = table.Column<double>(type: "float", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ExamsUsers", x => new { x.ExamId, x.StudentId });
+                    table.PrimaryKey("PK_StudentsExamsGrades", x => new { x.StudentId, x.ExamId });
                     table.ForeignKey(
-                        name: "FK_ExamsUsers_AspNetUsers_StudentId",
+                        name: "FK_StudentsExamsGrades_AspNetUsers_StudentId",
                         column: x => x.StudentId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ExamsUsers_Exams_ExamId",
+                        name: "FK_StudentsExamsGrades_Exams_ExamId",
                         column: x => x.ExamId,
                         principalTable: "Exams",
                         principalColumn: "Id",
@@ -49,9 +50,9 @@ namespace DAL.IdentityData.Migrations
                 column: "TeacherId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ExamsUsers_StudentId",
-                table: "ExamsUsers",
-                column: "StudentId");
+                name: "IX_StudentsExamsGrades_ExamId",
+                table: "StudentsExamsGrades",
+                column: "ExamId");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Exams_AspNetUsers_TeacherId",
@@ -69,7 +70,7 @@ namespace DAL.IdentityData.Migrations
                 table: "Exams");
 
             migrationBuilder.DropTable(
-                name: "ExamsUsers");
+                name: "StudentsExamsGrades");
 
             migrationBuilder.DropIndex(
                 name: "IX_Exams_TeacherId",

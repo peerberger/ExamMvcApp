@@ -7,6 +7,6 @@ namespace DAL.Models
 	{
 		//public int ClassroomId { get; set; }
 		public ICollection<Exam> Exams { get; set; }
-		//public ICollection<Grade> Grades { get; set; }
+		public ICollection<Grade> Grades { get; set; }
 	}
 }

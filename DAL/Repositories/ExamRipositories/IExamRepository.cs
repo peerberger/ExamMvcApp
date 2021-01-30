@@ -8,7 +8,7 @@ namespace DAL.Repositories.ExamRipositories
 	public interface IExamRepository : IBaseRepository<Exam>
 	{
 		Exam GetByIdIncludingUsers(object id);
-		IEnumerable<Exam> GetAllIncludingUsers();
-		IEnumerable<Exam> GetByUserAsNoTracking(ClaimsPrincipal user);
+		IEnumerable<Exam> GetAllIncludingStudents();
+		IEnumerable<Exam> GetByStudentAsNoTracking(ClaimsPrincipal user);
 	}
 }

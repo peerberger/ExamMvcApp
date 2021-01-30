@@ -27,19 +27,6 @@ namespace DAL.IdentityData
 			// For example, you can rename the ASP.NET Identity table names and more.
 			// Add your customizations after calling base.OnModelCreating(builder);
 
-			//builder.Entity<Student>()
-			//.Property(s => s.Exams)
-			//.HasColumnName("Exams");
-
-			//builder.Entity<Teacher>()
-			//	.Property(t => t.Exams)
-			//	.HasColumnName("Exams");
-
-			//builder.Entity<AppUser>()
-			//   .HasDiscriminator()
-			//   .HasValue<Student>("Student")
-			//   .HasValue<Teacher>("Teacher");
-
 			builder.Entity<Exam>()
 				.HasOne(e => e.Teacher)
 				.WithMany(t => t.Exams);
@@ -47,16 +34,20 @@ namespace DAL.IdentityData
 			builder.Entity<Exam>()
 				.HasMany(e => e.Students)
 				.WithMany(s => s.Exams)
-				.UsingEntity(j =>
-				{
-					j.ToTable("ExamsUsers");
-
-					j.Property(typeof(int), "ExamsId")
-						.HasColumnName("ExamId");
-
-					j.Property(typeof(string), "StudentsId")
-						.HasColumnName("StudentId");
-				});
+				.UsingEntity<Grade>(
+					j => j
+						.HasOne(g => g.Student)
+						.WithMany(s => s.Grades) // todo: maybe try to get rid of the grades properties where theyre not needed
+						.HasForeignKey(g => g.StudentId),
+					j => j
+						.HasOne(g => g.Exam)
+						.WithMany(e => e.Grades)
+						.HasForeignKey(g => g.ExamId),
+					j =>
+					{
+						j.ToTable("StudentsExamsGrades");
+						j.HasKey(t => new { t.StudentId, t.ExamId });
+					});
 		}
 	}
 }
