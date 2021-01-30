@@ -1,47 +1,85 @@
-﻿@model IEnumerable<DAL.Models.Exam>
+﻿@*@model IEnumerable<DAL.Models.Exam>*@
+@model IndexViewModel
 
 @{
-    ViewData["Title"] = "Index";
+	ViewData["Title"] = "Index";
 }
 
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+	<a asp-action="Create">Create New</a>
 </p>
 <table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Subject)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Duration)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
+	<thead>
 		<tr>
-			<td>
-				@Html.DisplayFor(modelItem => item.Subject)
-			</td>
-			<td>
-				@Html.DisplayFor(modelItem => item.Title)
-			</td>
-			<td>
-				@Html.DisplayFor(modelItem => item.Duration, "DurationFormatPartial")
-			</td>
-			<td>
-				<a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-				<a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-				<a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-			</td>
+			<th>
+				@Html.DisplayNameFor(model => model.FututreExams.FirstOrDefault().Subject)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.FututreExams.FirstOrDefault().Title)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.FututreExams.FirstOrDefault().Duration)
+			</th>
+			<th></th>
 		</tr>
-}
-    </tbody>
+	</thead>
+	<tbody>
+		@foreach (var item in Model.FututreExams)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.Subject)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Title)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Duration, "DurationFormatPartial")
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>
+
+<br />
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.PastExams.FirstOrDefault().Subject)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.PastExams.FirstOrDefault().Title)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.PastExams.FirstOrDefault().Duration)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.PastExams.FirstOrDefault().Grade)
+			</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model.PastExams)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.Subject)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Title)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Duration, "DurationFormatPartial")
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Grade)
+				</td>
+			</tr>
+		}
+	</tbody>
 </table>
