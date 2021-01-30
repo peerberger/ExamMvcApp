@@ -31,20 +31,21 @@ namespace DAL.Repositories.ExamRipositories
 			return GetAllIncluding(nameof(Exam.Students));
 		}
 
-		public IEnumerable<Exam> GetByStudentAsNoTracking(ClaimsPrincipal user)
+		public IEnumerable<Exam> GetByStudentIncludingGradesAsNoTracking(ClaimsPrincipal user)
 		{
 			var id = ClaimsUserParser.GetNameIdentifier(user);
+			//var id = "e46f70c1-7913-4faf-a763-1061adb12eb0";
 
 			// eagerly load only the related Users who match the id
 			var examsWithLoadedStudents = Context.Exams.AsNoTracking()
-				.Include(e => e.Students
-					.Where(u => u.Id == id))
-				//.Where(e => e.Users.Count == 1)
+				.Include(e => e.Grades
+					.Where(u => u.StudentId == id))
+				//.Where(e => e.Grades.Count > 0)
 				.ToList();
 
 			// filter out the exams that weren't assigned to the user
 			var filteredExams = examsWithLoadedStudents
-				.Where(e => e.Students.Count > 0)
+				.Where(e => e.Grades.Count > 0)
 				.ToList();
 
 			return filteredExams;

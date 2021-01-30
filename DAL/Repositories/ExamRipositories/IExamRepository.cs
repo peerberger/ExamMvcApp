@@ -9,6 +9,6 @@ namespace DAL.Repositories.ExamRipositories
 	{
 		Exam GetByIdIncludingUsers(object id);
 		IEnumerable<Exam> GetAllIncludingStudents();
-		IEnumerable<Exam> GetByStudentAsNoTracking(ClaimsPrincipal user);
+		IEnumerable<Exam> GetByStudentIncludingGradesAsNoTracking(ClaimsPrincipal user);
 	}
 }
