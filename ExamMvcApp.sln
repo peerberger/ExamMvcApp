@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PL", "PL\PL.csproj", "{DE9EB57F-80D1-4F76-9500-C543440B1E21}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{5786BC7E-C47E-4568-8D06-50A05E2AA6B0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL", "DAL\DAL.csproj", "{5786BC7E-C47E-4568-8D06-50A05E2AA6B0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExamMvcApp.UnitTests", "ExamMvcApp.UnitTests\ExamMvcApp.UnitTests.csproj", "{95E6E0C1-27FA-4E69-9EBE-3A5A14102294}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{5786BC7E-C47E-4568-8D06-50A05E2AA6B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5786BC7E-C47E-4568-8D06-50A05E2AA6B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5786BC7E-C47E-4568-8D06-50A05E2AA6B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95E6E0C1-27FA-4E69-9EBE-3A5A14102294}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95E6E0C1-27FA-4E69-9EBE-3A5A14102294}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95E6E0C1-27FA-4E69-9EBE-3A5A14102294}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95E6E0C1-27FA-4E69-9EBE-3A5A14102294}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
