@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PL.Models.Student
+namespace PL.Models.Shared
 {
 	public class ExamViewModel
 	{
