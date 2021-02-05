@@ -12,7 +12,8 @@ namespace DAL.Models
 	public class Exam
 	{
 		public int Id { get; set; }
-		//public int SubjectId { get; set; }
+		[Required]
+		public Subject SubjectObj { get; set; }
 		[Required]
 		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public string Subject { get; set; }

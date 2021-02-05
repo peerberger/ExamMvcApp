@@ -16,7 +16,7 @@ namespace DAL.IdentityData
 
 		//public DbSet<Classroom> Classrooms { get; set; }
 		public DbSet<Exam> Exams { get; set; }
-		//public DbSet<Subject> Subjects { get; set; }
+		public DbSet<Subject> Subjects { get; set; }
 		//public DbSet<Question> Questions { get; set; }
 		//public DbSet<Grade> Grades { get; set; }
 
@@ -46,8 +46,17 @@ namespace DAL.IdentityData
 					j =>
 					{
 						j.ToTable("StudentsExamsGrades");
-						j.HasKey(t => new { t.StudentId, t.ExamId });
+						j.HasKey(g => new { g.StudentId, g.ExamId });
 					});
+
+			builder.Entity<Exam>()
+				.HasOne(e => e.SubjectObj)
+				.WithMany(s => s.Exams)
+				.OnDelete(DeleteBehavior.Restrict);
+
+			builder.Entity<Exam>()
+				.Property(typeof(int?), "SubjectObjId")
+				.IsRequired(false);
 		}
 	}
 }

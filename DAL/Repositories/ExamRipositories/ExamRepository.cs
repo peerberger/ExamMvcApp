@@ -31,7 +31,7 @@ namespace DAL.Repositories.ExamRipositories
 			return GetAllIncluding(nameof(Exam.Students));
 		}
 
-		public IEnumerable<Exam> GetByStudentIncludingGradesAsNoTracking(ClaimsPrincipal user)
+		public IEnumerable<Exam> GetByStudentIncludingGradesAndSubjectsAsNoTracking(ClaimsPrincipal user)
 		{
 			var id = ClaimsUserParser.GetNameIdentifier(user);
 			//var id = "e46f70c1-7913-4faf-a763-1061adb12eb0";
@@ -40,6 +40,7 @@ namespace DAL.Repositories.ExamRipositories
 			var examsWithLoadedStudents = Context.Exams.AsNoTracking()
 				.Include(e => e.Grades
 					.Where(u => u.StudentId == id))
+				.Include(e => e.SubjectObj)
 				//.Where(e => e.Grades.Count > 0)
 				.ToList();
 
