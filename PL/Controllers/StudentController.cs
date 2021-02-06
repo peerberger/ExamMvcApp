@@ -43,14 +43,25 @@ namespace PL.Controllers
 
 			//exam.Users.Add(student);
 			//_unitOfWork.SaveChanges();
-			
+
 
 			//var users = _unitOfWork.Exams.GetAllIncludingStudents();
 
 
+			//SeedSubjects();
 
-			
-			var exams = _unitOfWork.Exams.GetByStudentIncludingGradesAsNoTracking(User);
+			//var sub = _unitOfWork.Subjects.GetById(3);
+
+			//_unitOfWork.Subjects.Remove(sub);
+			//_unitOfWork.SaveChanges();
+
+
+
+
+
+
+
+			var exams = _unitOfWork.Exams.GetByStudentIncludingGradesAndSubjectsAsNoTracking(User);
 
 			var indexViewModel = StudentViewModelsGenerator.GenerateIndexViewModel(exams);
 
@@ -64,7 +75,8 @@ namespace PL.Controllers
 			{
 				new Exam{Subject = "math",Title = "calculus",Duration = TimeSpan.FromMinutes(1)},
 				new Exam{Subject = "math",Title = "algebra",Duration = TimeSpan.FromMinutes(2)},
-				new Exam{Subject = "math",Title = "blabla",Duration = TimeSpan.FromMinutes(3)}
+				new Exam{Subject = "pop",Title = "blabla",Duration = TimeSpan.FromMinutes(3)},
+				new Exam{Subject = "pop",Title = "lalala",Duration = TimeSpan.FromMinutes(4)}
 			};
 
 			_unitOfWork.Exams.AddRange(exams);
@@ -79,6 +91,17 @@ namespace PL.Controllers
 			_unitOfWork.SaveChanges();
 		}
 
+		//private void SeedSubjects()
+		//{
+		//	var subjects = new List<Subject>
+		//	{
+		//		new Subject { Name = "math" },
+		//		new Subject { Name = "pop" }
+		//	};
+
+		//	_unitOfWork.Subjects.AddRange(subjects);
+		//	_unitOfWork.SaveChanges();
+		//}
 
 
 		// GET: StudentController/Details/5

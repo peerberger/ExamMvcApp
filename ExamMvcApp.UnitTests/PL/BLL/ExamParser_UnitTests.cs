@@ -1,5 +1,6 @@
 using DAL.Models;
 using ExamMvcApp.UnitTests.EqualityComparers;
+using ExamMvcApp.UnitTests.Generators;
 using PL.BLL;
 using PL.Models.Shared;
 using System;
@@ -8,12 +9,32 @@ using Xunit;
 
 namespace ExamMvcApp.UnitTests.PL.BLL
 {
-	public class ExamToExamViewModelConverter_UnitTests
+	public class ExamParser_UnitTests
 	{
+		[Fact]
+		public void ParseFutureAndPastExams_ShouldWork()
+		{
+			// arrange
+			var exams = ExamsGenerator.GenerateExams();
+			var expectedFutureExams = ExamsGenerator.GenerateFutureExams();
+			var expectedPastExams = ExamsGenerator.GeneratePastExams();
+
+			var actualFutureExams = new List<Exam>();
+			var actualPastExams = new List<Exam>();
+
+			// act
+			ExamParser.ParseFutureAndPastExams(exams, ref actualFutureExams, ref actualPastExams);
+
+			// assert
+			Assert.Equal(expectedFutureExams, actualFutureExams, new ExamEqualityComparer());
+			Assert.Equal(expectedPastExams, actualPastExams, new ExamEqualityComparer());
+		}
+
+
 		[Theory]
 		[InlineData("math", "calc", 0.5, 95)]
 		[InlineData(null, "calc", 0.5, 95)]
-		public void Convert_SimpleValues_ShouldWork(
+		public void ConvertToExamViewModel_SimpleValues_ShouldWork(
 			string subject,
 			string title,
 			double duration,
@@ -41,7 +62,7 @@ namespace ExamMvcApp.UnitTests.PL.BLL
 			};
 
 			// act
-			var actual = ExamToExamViewModelConverter.Convert(exam);
+			var actual = ExamParser.ConvertToExamViewModel(exam);
 
 			// assert
 			Assert.Equal(expected, actual, new ExamViewModelEqualityComparer());

@@ -1,5 +1,4 @@
-﻿@*@model IEnumerable<DAL.Models.Exam>*@
-@model IndexViewModel
+﻿@model IndexViewModel
 
 @{
 	ViewData["Title"] = "Index";
@@ -10,75 +9,82 @@
 <p>
 	<a asp-action="Create">Create New</a>
 </p>
+<h3>Future Exams</h3>
 <table class="table">
 	<thead>
 		<tr>
 			<th>
-				@Html.DisplayNameFor(model => model.FututreExams.FirstOrDefault().Subject)
+				@Html.DisplayNameFor(model => model.FutureExamsTable.FirstOrDefault().Exams.FirstOrDefault().Title)
 			</th>
 			<th>
-				@Html.DisplayNameFor(model => model.FututreExams.FirstOrDefault().Title)
-			</th>
-			<th>
-				@Html.DisplayNameFor(model => model.FututreExams.FirstOrDefault().Duration)
+				@Html.DisplayNameFor(model => model.FutureExamsTable.FirstOrDefault().Exams.FirstOrDefault().Duration)
 			</th>
 		</tr>
 	</thead>
 	<tbody>
-		@foreach (var item in Model.FututreExams)
+		@foreach (var subject in Model.FutureExamsTable)
 		{
 			<tr>
-				<td>
-					@Html.DisplayFor(modelItem => item.Subject)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.Title)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.Duration, "DurationFormatPartial")
-				</td>
+				<th colspan="2">
+					@Html.DisplayFor(modelItem => subject.Name)
+				</th>
 			</tr>
+
+			@foreach (var exam in subject.Exams)
+			{
+				<tr>
+					<td>
+						@Html.DisplayFor(modelItem => exam.Title)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => exam.Duration, "DurationFormatPartial")
+					</td>
+				</tr>
+			}
 		}
 	</tbody>
 </table>
 
 <br />
 
+<h3>Past Exams</h3>
 <table class="table">
 	<thead>
 		<tr>
 			<th>
-				@Html.DisplayNameFor(model => model.PastExams.FirstOrDefault().Subject)
+				@Html.DisplayNameFor(model => model.PastExamsTable.FirstOrDefault().Exams.FirstOrDefault().Title)
 			</th>
 			<th>
-				@Html.DisplayNameFor(model => model.PastExams.FirstOrDefault().Title)
+				@Html.DisplayNameFor(model => model.PastExamsTable.FirstOrDefault().Exams.FirstOrDefault().Duration)
 			</th>
 			<th>
-				@Html.DisplayNameFor(model => model.PastExams.FirstOrDefault().Duration)
+				@Html.DisplayNameFor(model => model.PastExamsTable.FirstOrDefault().Exams.FirstOrDefault().Grade)
 			</th>
-			<th>
-				@Html.DisplayNameFor(model => model.PastExams.FirstOrDefault().Grade)
-			</th>
-			<th></th>
 		</tr>
 	</thead>
 	<tbody>
-		@foreach (var item in Model.PastExams)
+		@foreach (var subject in Model.PastExamsTable)
 		{
 			<tr>
-				<td>
-					@Html.DisplayFor(modelItem => item.Subject)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.Title)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.Duration, "DurationFormatPartial")
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.Grade)
-				</td>
+				<th colspan="2">
+					@Html.DisplayFor(modelItem => subject.Name)
+				</th>
 			</tr>
+
+			@foreach (var exam in subject.Exams)
+			{
+				<tr>
+					<td>
+						@Html.DisplayFor(modelItem => exam.Title)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => exam.Duration, "DurationFormatPartial")
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => exam.Grade)
+					</td>
+				</tr>
+			}
 		}
 	</tbody>
 </table>

@@ -8,9 +8,9 @@ namespace PL.Models.Student
 {
 	public class IndexViewModel
 	{
-		public ICollection<ExamViewModel> FututreExams { get; set; }
-			= new List<ExamViewModel>();
-		public ICollection<ExamViewModel> PastExams { get; set; }
-			= new List<ExamViewModel>();
+		public ICollection<SubjectViewModel> FutureExamsTable { get; set; }
+			= new List<SubjectViewModel>();
+		public ICollection<SubjectViewModel> PastExamsTable { get; set; }
+			= new List<SubjectViewModel>();
 	}
 }

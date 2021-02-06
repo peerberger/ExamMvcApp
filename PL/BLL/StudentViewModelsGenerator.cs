@@ -12,23 +12,21 @@ namespace PL.BLL
 	{
 		public static IndexViewModel GenerateIndexViewModel(IEnumerable<Exam> exams)
 		{
-			var viewModel = new IndexViewModel();
+			// separating the passed exams to future and past exams
+			var futureExams = new List<Exam>();
+			var pastExams = new List<Exam>();
+			ExamParser.ParseFutureAndPastExams(exams, ref futureExams, ref pastExams);
 
-			foreach (var exam in exams)
-			{
-				var examViewModel = ExamToExamViewModelConverter.Convert(exam);
+			// creating the IndexViewModel object
+			var indexViewModel = new IndexViewModel();
 
-				if (examViewModel.Grade == null)
-				{
-					viewModel.FututreExams.Add(examViewModel);
-				}
-				else
-				{
-					viewModel.PastExams.Add(examViewModel);
-				}
-			}
+			// converting the above exam lists to collections of SubjectViewModels,
+			// and assigning them to the IndexViewModel's exam tables
+			indexViewModel.FutureExamsTable = SubjectParser.ParseSubjectViewModels(futureExams);
+			indexViewModel.PastExamsTable = SubjectParser.ParseSubjectViewModels(pastExams);
 
-			return viewModel;
+			// returning the IndexViewModel
+			return indexViewModel;
 		}
 	}
 }

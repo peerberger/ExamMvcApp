@@ -1,5 +1,6 @@
 ﻿using DAL.Models;
 using ExamMvcApp.UnitTests.EqualityComparers;
+using ExamMvcApp.UnitTests.Generators;
 using PL.BLL;
 using PL.Models.Shared;
 using PL.Models.Student;
@@ -18,7 +19,7 @@ namespace ExamMvcApp.UnitTests.PL.BLL
 		public void GenerateIndexViewModel_ShouldWork()
 		{
 			// arrange
-			var exams = GenerateExams();
+			var exams = ExamsGenerator.GenerateExams();
 			var expected = GenerateIndexViewModel();
 
 			// act
@@ -26,40 +27,51 @@ namespace ExamMvcApp.UnitTests.PL.BLL
 
 			// assert
 			Assert.Equal(
-				expected.FututreExams,
-				actual.FututreExams,
-				new ExamViewModelEqualityComparer());
+				expected.FutureExamsTable,
+				actual.FutureExamsTable,
+				new SubjectViewModelEqualityComparer());
+
 			Assert.Equal(
-				expected.PastExams,
-				actual.PastExams,
-				new ExamViewModelEqualityComparer());
-		}
-
-		public IEnumerable<Exam> GenerateExams()
-		{
-			var exams = new List<Exam>
-			{
-				new Exam {Subject = "math",Title = "calculus",Duration = TimeSpan.FromMinutes(1), Grades = new List<Grade> { new Grade() }},
-				new Exam {Subject = "math",Title = "algebra",Duration = TimeSpan.FromMinutes(2), Grades = new List<Grade> { new Grade { Score = 95 } } },
-				new Exam {Subject = "math",Title = "blabla",Duration = TimeSpan.FromMinutes(3), Grades = new List<Grade> { new Grade() }}
-			};
-
-			return exams;
+				expected.PastExamsTable,
+				actual.PastExamsTable,
+				new SubjectViewModelEqualityComparer());
 		}
 
 		public IndexViewModel GenerateIndexViewModel()
 		{
 			var indexViewModel = new IndexViewModel();
 
-			indexViewModel.FututreExams = new List<ExamViewModel>
+			indexViewModel.FutureExamsTable = new List<SubjectViewModel>
 			{
-				new ExamViewModel {Subject = "math",Title = "calculus",Duration = TimeSpan.FromMinutes(1)},
-				new ExamViewModel {Subject = "math",Title = "blabla",Duration = TimeSpan.FromMinutes(3)}
+				new SubjectViewModel
+				{
+					Name = "math",
+					Exams = new List<ExamViewModel>
+					{
+						new ExamViewModel {Subject = "math",Title = "calculus",Duration = TimeSpan.FromMinutes(1)},
+					}
+				},
+				new SubjectViewModel
+				{
+					Name = "pop",
+					Exams = new List<ExamViewModel>
+					{
+						new ExamViewModel {Subject = "pop",Title = "blabla",Duration = TimeSpan.FromMinutes(3)},
+						new ExamViewModel {Subject = "pop",Title = "lalala",Duration = TimeSpan.FromMinutes(4)}
+					}
+				}
 			};
 
-			indexViewModel.PastExams = new List<ExamViewModel>
+			indexViewModel.PastExamsTable = new List<SubjectViewModel>
 			{
-				new ExamViewModel {Subject = "math",Title = "algebra",Duration = TimeSpan.FromMinutes(2), Grade =  95 }
+				new SubjectViewModel
+				{
+					Name = "math",
+					Exams = new List<ExamViewModel>
+					{
+						new ExamViewModel {Subject = "math",Title = "algebra",Duration = TimeSpan.FromMinutes(2), Grade =  95 }
+					}
+				}
 			};
 
 			return indexViewModel;
