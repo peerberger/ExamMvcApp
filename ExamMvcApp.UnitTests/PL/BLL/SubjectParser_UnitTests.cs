@@ -14,14 +14,14 @@ namespace ExamMvcApp.UnitTests.PL.BLL
 	public class SubjectParser_UnitTests
 	{
 		[Fact]
-		public void ParseSubjectViewModels_ShouldWork()
+		public void ParseSubjectViewModelsInOrder_ShouldWork()
 		{
 			// arrange
 			var exams = ExamsGenerator.GenerateFutureExams();
 			var expected = SubjectsGenerator.GenerateFutureSubjectViewModelsOrderedBySubject();
 
 			// act
-			var actual = SubjectParser.ParseSubjectViewModels(exams);
+			var actual = SubjectParser.ParseSubjectViewModelsInOrder(exams);
 
 			// assert
 			Assert.Equal(expected, actual, new SubjectViewModelEqualityComparer());

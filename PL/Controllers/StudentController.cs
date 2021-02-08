@@ -73,10 +73,11 @@ namespace PL.Controllers
 		{
 			var exams = new List<Exam>
 			{
-				new Exam{Subject = "math",Title = "calculus",Duration = TimeSpan.FromMinutes(1)},
-				new Exam{Subject = "math",Title = "algebra",Duration = TimeSpan.FromMinutes(2)},
-				new Exam{Subject = "pop",Title = "blabla",Duration = TimeSpan.FromMinutes(3)},
-				new Exam{Subject = "pop",Title = "lalala",Duration = TimeSpan.FromMinutes(4)}
+				new Exam { Title = "calculus", Duration = TimeSpan.FromMinutes(1) },
+				new Exam { Title = "algebra", Duration = TimeSpan.FromMinutes(2) },
+				new Exam { Title = "blabla", Duration = TimeSpan.FromMinutes(3) },
+				new Exam { Title = "lalala", Duration = TimeSpan.FromMinutes(4) },
+				new Exam { Title = "infi", Duration = TimeSpan.FromMinutes(5) }
 			};
 
 			_unitOfWork.Exams.AddRange(exams);

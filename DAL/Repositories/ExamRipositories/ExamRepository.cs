@@ -40,7 +40,7 @@ namespace DAL.Repositories.ExamRipositories
 			var examsWithLoadedStudents = Context.Exams.AsNoTracking()
 				.Include(e => e.Grades
 					.Where(u => u.StudentId == id))
-				.Include(e => e.SubjectObj)
+				.Include(e => e.Subject)
 				//.Where(e => e.Grades.Count > 0)
 				.ToList();
 

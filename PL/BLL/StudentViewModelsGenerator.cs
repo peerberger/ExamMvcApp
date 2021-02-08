@@ -22,8 +22,8 @@ namespace PL.BLL
 
 			// converting the above exam lists to collections of SubjectViewModels,
 			// and assigning them to the IndexViewModel's exam tables
-			indexViewModel.FutureExamsTable = SubjectParser.ParseSubjectViewModels(futureExams);
-			indexViewModel.PastExamsTable = SubjectParser.ParseSubjectViewModels(pastExams);
+			indexViewModel.FutureExamsTable = SubjectParser.ParseSubjectViewModelsInOrder(futureExams);
+			indexViewModel.PastExamsTable = SubjectParser.ParseSubjectViewModelsInOrder(pastExams);
 
 			// returning the IndexViewModel
 			return indexViewModel;

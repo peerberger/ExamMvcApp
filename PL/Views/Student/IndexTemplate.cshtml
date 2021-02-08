@@ -1,8 +1,8 @@
 ﻿@model IEnumerable<DAL.Models.Exam>
 
 @{
-    ViewData["Title"] = "IndexTemplate";
-    Model.FirstOrDefault().Subject = null;
+	ViewData["Title"] = "IndexTemplate";
+	//Model.FirstOrDefault().Subject = null;
 }
 
 <h1>IndexTemplate</h1>
@@ -13,24 +13,23 @@
 <table class="table">
     <thead>
         <tr>
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.Subject)
-            </th>
+            </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.Title)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Duration)
             </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.Subject)
-            </td>
+            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.Title)
             </td>

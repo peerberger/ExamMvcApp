@@ -50,12 +50,12 @@ namespace DAL.IdentityData
 					});
 
 			builder.Entity<Exam>()
-				.HasOne(e => e.SubjectObj)
+				.HasOne(e => e.Subject)
 				.WithMany(s => s.Exams)
 				.OnDelete(DeleteBehavior.Restrict);
 
 			builder.Entity<Exam>()
-				.Property(typeof(int?), "SubjectObjId")
+				.Property(typeof(int?), "SubjectId")
 				.IsRequired(false);
 		}
 	}

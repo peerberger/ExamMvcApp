@@ -17,7 +17,7 @@ namespace ExamMvcApp.UnitTests.EqualityComparers
 				return false;
 			}
 
-			if (x.Subject != y.Subject)
+			if (x.Subject.Name != y.Subject.Name)
 			{
 				return false;
 			}

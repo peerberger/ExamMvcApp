@@ -9,7 +9,7 @@ namespace PL.BLL
 {
 	public static class SubjectParser
 	{
-		public static ICollection<SubjectViewModel> ParseSubjectViewModels(IEnumerable<Exam> exams)
+		public static ICollection<SubjectViewModel> ParseSubjectViewModelsInOrder(IEnumerable<Exam> exams)
 		{
 			var subjectViewModels = new List<SubjectViewModel>();
 			var subjectNames = ParseSubjectNames(exams);
@@ -18,7 +18,7 @@ namespace PL.BLL
 			{
 				var subjectViewModel = new SubjectViewModel { Name = subjectName };
 
-				var subjectExams = exams.Where(e => e.SubjectObj.Name == subjectName);
+				var subjectExams = exams.Where(e => e.Subject.Name == subjectName);
 				var examViewModels = ExamParser.ConvertToExamViewModels(subjectExams);
 
 				subjectViewModel.Exams.AddRange(examViewModels);
@@ -26,7 +26,7 @@ namespace PL.BLL
 				subjectViewModels.Add(subjectViewModel);
 			}
 
-			return subjectViewModels;
+			return subjectViewModels.OrderBy(s => s.Name).ToList();
 		}
 
 		public static HashSet<string> ParseSubjectNames(IEnumerable<Exam> exams)
@@ -35,7 +35,7 @@ namespace PL.BLL
 
 			foreach (var exam in exams)
 			{
-				subjectNames.Add(exam.SubjectObj.Name);
+				subjectNames.Add(exam.Subject.Name);
 			}
 
 			return subjectNames;

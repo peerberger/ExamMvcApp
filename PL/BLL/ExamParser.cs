@@ -28,7 +28,7 @@ namespace PL.BLL
 		{
 			ExamViewModel examViewModel = new ExamViewModel();
 
-			examViewModel.Subject = exam.Subject;
+			//examViewModel.Subject = exam.Subject;
 			examViewModel.Title = exam.Title;
 			examViewModel.Duration = exam.Duration;
 			examViewModel.Grade = exam.Grades.FirstOrDefault().Score;

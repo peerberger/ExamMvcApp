@@ -32,10 +32,9 @@ namespace ExamMvcApp.UnitTests.PL.BLL
 
 
 		[Theory]
-		[InlineData("math", "calc", 0.5, 95)]
-		[InlineData(null, "calc", 0.5, 95)]
+		[InlineData(/*"math", */"calc", 0.5, 95)]
+		[InlineData(/*null, */"calc", 0.5, null)]
 		public void ConvertToExamViewModel_SimpleValues_ShouldWork(
-			string subject,
 			string title,
 			double duration,
 			double? grade
@@ -44,7 +43,7 @@ namespace ExamMvcApp.UnitTests.PL.BLL
 			// arrange
 			Exam exam = new Exam
 			{
-				Subject = subject,
+				//Subject = subject,
 				Title = title,
 				Duration = TimeSpan.FromHours(duration),
 				Grades = new List<Grade>
@@ -55,7 +54,7 @@ namespace ExamMvcApp.UnitTests.PL.BLL
 
 			ExamViewModel expected = new ExamViewModel
 			{
-				Subject = subject,
+				//Subject = subject,
 				Title = title,
 				Duration = TimeSpan.FromHours(duration),
 				Grade = grade

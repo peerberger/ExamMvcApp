@@ -13,10 +13,10 @@ namespace DAL.Models
 	{
 		public int Id { get; set; }
 		[Required]
-		public Subject SubjectObj { get; set; }
-		[Required]
-		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-		public string Subject { get; set; }
+		public Subject Subject { get; set; }
+		//[Required]
+		//[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+		//public string Subject { get; set; }
 		[Required]
 		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public string Title { get; set; }

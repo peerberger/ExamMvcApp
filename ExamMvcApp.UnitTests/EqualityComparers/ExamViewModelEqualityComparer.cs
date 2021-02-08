@@ -17,10 +17,10 @@ namespace ExamMvcApp.UnitTests.EqualityComparers
 				return false;
 			}
 
-			if (x.Subject != y.Subject)
-			{
-				return false;
-			}
+			//if (x.Subject != y.Subject)
+			//{
+			//	return false;
+			//}
 
 			if (x.Title != y.Title)
 			{

@@ -18,7 +18,7 @@ namespace ExamMvcApp.UnitTests.Generators
 					Name = "math",
 					Exams = new List<ExamViewModel>
 					{
-						new ExamViewModel { Subject = "math", Title = "calculus", Duration = TimeSpan.FromMinutes(1)}
+						new ExamViewModel { Title = "calculus", Duration = TimeSpan.FromMinutes(1)}
 					}
 				},
 				new SubjectViewModel
@@ -26,8 +26,8 @@ namespace ExamMvcApp.UnitTests.Generators
 					Name = "pop",
 					Exams = new List<ExamViewModel>
 					{
-						new ExamViewModel { Subject = "pop", Title = "blabla", Duration = TimeSpan.FromMinutes(3)},
-						new ExamViewModel { Subject = "pop", Title = "lalala", Duration = TimeSpan.FromMinutes(4)}
+						new ExamViewModel { Title = "blabla", Duration = TimeSpan.FromMinutes(3)},
+						new ExamViewModel { Title = "lalala", Duration = TimeSpan.FromMinutes(4)}
 					}
 				}
 			};
